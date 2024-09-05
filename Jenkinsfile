@@ -1,12 +1,13 @@
 pipeline {
-    agent none // This is fine if you don't want to specify a default agent
+    agent none
 
     stages {
         stage('Maven Install') {
             agent {
                 docker {
                     image 'maven:3.5.0'
-                    // Optional: add 'args' here if needed, for example: args '-v /root/.m2:/root/.m2'
+                    label '' // Optional: you can add a label if required for specific nodes
+                    reuseNode true // This allows the container to use the same workspace
                 }
             }
             steps {
@@ -15,4 +16,3 @@ pipeline {
         }
     }
 }
-
